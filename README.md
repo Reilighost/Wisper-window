@@ -36,7 +36,7 @@ SOAT is a user-friendly audio transcription tool that lets you:
 
 ## 🛠 How to Use:
 
-1. Run the application.
+1. Run the application inside Stable_build folder
 2. If using for the first time, you will be prompted to enter your OpenAI API key.
 3. Run the application again.
 4. Click on the GIF animation to start recording.
@@ -86,7 +86,7 @@ SOAT - это удобный инструмент для транскрибир�
 
 ## 🛠 Как использовать:
 
-1. Запустите приложение.
+1. Запустите приложение внутри Stable_build папки.
 2. Если вы используете его впервые, вам будет предложено ввести ваш API-ключ OpenAI.
 3. Запустите приложение снова.
 4. Нажмите на GIF-анимацию, чтобы начать запись.
