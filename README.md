@@ -46,3 +46,4 @@ SOAT is a user-friendly audio transcription tool that lets you:
 ## 📜 License:
 
 This project is open-source. Feel free to use, modify, and distribute as you see fit.
+Here my TG chanel - https://t.me/CryptoBub_ble. I be glad if you subscribe
