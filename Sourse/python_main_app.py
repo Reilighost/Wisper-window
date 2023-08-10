@@ -213,9 +213,9 @@ class TranscriptionApp:
             return file.readline().strip()
     def set_gif_state(self, state):
         gif_paths = {
-            'default': "C:\\Soft\\Myshit\\SOAT\\Sourse\\default.gif",
-            'recording': "C:\\Soft\\Myshit\\SOAT\\Sourse\\recording.gif",
-            'processing': "C:\\Soft\\Myshit\\SOAT\\Sourse\\processing.gif"
+            'default': "default.gif",
+            'recording': "recording.gif",
+            'processing': "processing.gif"
         }
         gif_path = gif_paths.get(state)
         if not os.path.exists(gif_path):
