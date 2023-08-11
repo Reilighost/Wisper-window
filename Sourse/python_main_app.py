@@ -243,6 +243,7 @@ class TranscriptionApp:
         self.root.mainloop()
 class AnimatedGIF(tk.Label):
     def __init__(self, master, path, *args, **kwargs):
+        self.is_animating = False  # Add this flag
         self._photo_images = []  # List to store the PhotoImage objects and prevent garbage collection
         self.frames = []
         self.current_frame = 0  # Initializing current_frame
@@ -264,20 +265,22 @@ class AnimatedGIF(tk.Label):
             pass
 
     def play(self):
-        self.stop()  # Stop any ongoing animation
+        self.stop()  # Stop any ongoing animation first
         self.animate()
 
     def animate(self):
         if not self.frames:  # Check if frames list is empty
             return
+        self.is_animating = True  # Set the flag here
         self.current_frame = (self.current_frame + 1) % len(self.frames)
         self.config(image=self.frames[self.current_frame])
         self._after_id = self.after(20, self.animate)  # Store the after ID
 
     def stop(self):
         if self._after_id:
-            self.after_cancel(self._after_id)
+            self.after_cancel(self._after_id)  # Cancel any scheduled call to animate()
             self._after_id = None
+            self.is_animating = False  # Clear the flag here
 
     def set_gif(self, path):
         self.load_frames(path)
