@@ -1,49 +1,29 @@
 # 🎙 SOAT: State-of-Art-Transcribing
 
-Transcribe your spoken words into text using OpenAI's API in real-time with this intuitive desktop application.
+Turn spoken words into written text in an instant with SOAT, a sleek and intuitive desktop tool powered by OpenAI.
 
-## 🔍 Overview:
+## 🔍 What is SOAT?
 
-SOAT is a user-friendly audio transcription tool that lets you:
+Your personal transcription assistant! With SOAT, you:
 
-- **Record Audio**: Use your microphone to capture your voice or any audio source.
-- **Transcribe**: Leveraging OpenAI's powerful API, the application transcribes the audio to text.
-- **Instant Feedback**: Witness the state of the application with dynamic GIF animations.
-- **Easy-to-Use GUI**: Interact seamlessly with the tool via an intuitive graphical user interface built with `tkinter`.
-- **Manage API Key**: The first-time users are guided to input their OpenAI API key with easy-to-follow instructions and links.
+- **Speak**: Just talk into your microphone.
+- **See**: Your words are instantly transformed into text.
+- **Stay Sleek**: There's no bulky interface. SOAT is minimal and stylish, just a floating icon on your desktop.
 
-## 🚀 Features:
+## 🛠 How to Use
 
-- **Intuitive GIF Feedback**:
-  - The application provides visual feedback using GIF animations based on the current state - whether it's recording, processing, or idle.
-  
-- **Microphone Selection**:
-  - The application automatically selects the default microphone for recording but can be extended for custom microphone selection.
-  
-- **API Key Management**:
-  - For first-time users, the application will prompt to enter the OpenAI API key. The key is stored locally for future sessions.
-  
-- **Clipboard Integration**:
-  - Once transcribed, the text is instantly copied to the clipboard for easy pasting and sharing.
+1. **Drag and Place**: Right-click on the SOAT icon and drag it to where you want on your screen.
+2. **Start Talking**: Left-click on the icon to start recording your voice.
+3. **Stop and Transcribe**: Left-click again when you're done talking. Your words will be transcribed and copied to your clipboard, ready for pasting.
+4. **Close It**: Want to close SOAT? Just hold right-click and hit the escape key.
 
-- **Topmost Window**:
-  - The application window remains on top for easy access, ensuring a smooth user experience.
+## 📦 What You Need
 
-## 📦 Requirements:
+- **OpenAI API Key**: Using SOAT for the first time? We'll guide you on entering your OpenAI API key. Enter it once, and we'll remember it for future sessions.
+- **Mic**: SOAT listens through any microphone, even the built-in one.
+## 📜 Stay Connected
 
-- Python Libraries: `pyaudio`, `openai`, `tkinter`, `PIL`, `wave`, `pyperclip`, and `webbrowser`.
-- OpenAI API Key: The application requires a personal API key from OpenAI for the transcription service.
+Join me on [Telegram](https://t.me/CryptoBub_ble) for updates and community discussions. 
 
-## 🛠 How to Use:
-
-1. Run the application inside Stable_build folder
-2. If using for the first time, you will be prompted to enter your OpenAI API key.
-3. Run the application again.
-4. Click on the GIF animation to start recording.
-5. Click again to stop recording and initiate the transcription.
-6. The transcribed text will be copied to your clipboard automatically.
-
-## 📜 License:
-
-This project is open-source. Feel free to use, modify, and distribute as you see fit.
-Here my TG chanel - https://t.me/CryptoBub_ble. I be glad if you subscribe
+🚀 Upcoming: Voice Assistant, GPT-4 Copilot, and more.  
+💰 Explore my crypto scripts that can help you made money on industrial scale.
