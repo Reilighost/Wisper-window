@@ -9,6 +9,9 @@ import pyperclip
 import webbrowser
 import json
 # Constants
+
+PREFERRED_MODEL = "gpt-3.5-turbo"  # Users can change this value to their desired model
+ENABLE_RESPONSE_WINDOW = False
 CONFIG_PATH = "config.json"
 GIF_PATHS = {
     'default': "default.gif",
@@ -17,20 +20,49 @@ GIF_PATHS = {
 }
 
 class ResponseWindow:
-    def __init__(self, master, response_text):
+    def __init__(self, master, response_text, api_key):
         self.master = master
         self.response_text = response_text
+        self.api_key = api_key  # Storing the API key
 
         # Create the window
         self.response_window = tk.Toplevel(self.master)
-        self.response_window.title("Transcription")
-        self.response_window.geometry('400x300')
+        self.response_window.title("Transcription and Response")
+        self.response_window.geometry('400x400')
         self.response_window.attributes('-topmost', True)  # Ensure transcription window is always on top
 
-        # Add text widget to display the response
-        self.text_widget = tk.Text(self.response_window, wrap=tk.WORD)
-        self.text_widget.pack(expand=True, fill=tk.BOTH, padx=10, pady=10)
-        self.text_widget.insert(tk.END, self.response_text)
+        # Add text widget to display the transcribed text
+        self.transcription_widget = tk.Text(self.response_window, wrap=tk.WORD, height=10)
+        self.transcription_widget.pack(expand=True, fill=tk.BOTH, padx=10, pady=10)
+        self.transcription_widget.insert(tk.END, "Transcribed Text:\n" + self.response_text)
+        self.transcription_widget.config(state=tk.DISABLED)  # Making the widget read-only
+
+        # Add text widget to display GPT-4's response
+        self.response_widget = tk.Text(self.response_window, wrap=tk.WORD, height=10)
+        self.response_widget.pack(expand=True, fill=tk.BOTH, padx=10, pady=10)
+        gpt_response = self.get_gpt4_response(self.response_text)
+        self.response_widget.insert(tk.END, "GPT-4 Response:\n" + gpt_response)
+        self.response_widget.config(state=tk.DISABLED)  # Making the widget read-only
+
+    def get_gpt4_response(self, prompt):
+        openai.api_key = self.api_key
+
+        # Format the input as a conversation using the chat completions API
+        conversation = {
+            "model": PREFERRED_MODEL,  # or "gpt-3.5-turbo"
+            "messages": [
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": prompt}
+            ]
+        }
+
+        # Get the response from GPT-4
+        response = openai.ChatCompletion.create(**conversation)
+
+        # Extract the assistant's message from the response
+        gpt_response = response.choices[0].message['content']
+
+        return gpt_response.strip()
 
     def display(self):
         self.response_window.mainloop()
@@ -101,13 +133,13 @@ class TranscriptionApp:
 
         self.audio_recorder = AudioRecorder()
 
-        api_key = ConfigManager.get_api_key()
-        if not api_key:
+        self.api_key = ConfigManager.get_api_key()
+        if not self.api_key:
             self.prompt_api_key_input()
             api_key = ConfigManager.get_api_key()
 
         # Ensure that the audio_transcriber is initialized after the key is provided
-        self.audio_transcriber = AudioTranscriber(api_key)
+        self.audio_transcriber = AudioTranscriber(self.api_key)
 
         self.setup_ui()
     def start_move(self, event):
@@ -176,8 +208,10 @@ class TranscriptionApp:
         transcription = self.audio_transcriber.transcribe_audio("voice_sample.wav")
         pyperclip.copy(transcription)
 
-        # Display in a separate window using the new ResponseWindow class
-        self.response_window = ResponseWindow(self.root, transcription)
+        # Check if the response window should be displayed
+        if ENABLE_RESPONSE_WINDOW is True:
+            # Display in a separate window using the new ResponseWindow class
+            self.response_window = ResponseWindow(self.root, transcription, self.api_key)
 
         self.set_gif_state('default')
 
@@ -248,6 +282,7 @@ class AnimatedGIF(tk.Label):
     def set_gif(self, path):
         self.load_frames(path)
         self.config(image=self.frames[0])
+
 def run():
     root = tk.Tk()
     app = TranscriptionApp(root)
