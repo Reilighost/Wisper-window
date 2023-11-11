@@ -1,0 +1,10 @@
+os
+threading
+wave
+tkinter
+Pillow
+pyaudio
+openai
+pyperclip
+webbrowser
+json
